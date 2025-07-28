@@ -23,11 +23,11 @@ public class SelfCategoryService implements CategoryService{
         List<Category> list=categoryRepository.findAll();
 
         List<String> ans=new ArrayList<String>();
-//        for(int i=0;i<list.size();i++)
-//        {
-//            ans.add(list.get(i).getDescription());
-//
-//        }
+        for(int i=0;i<list.size();i++)
+        {
+            ans.add(list.get(i).getDescription());
+
+        }
 
         return ans;
 

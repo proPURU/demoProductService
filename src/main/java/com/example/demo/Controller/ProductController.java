@@ -31,15 +31,15 @@ public class ProductController {
     Product convertProductDTO_to_Product(ProductDTO productDTO)
     {
         Product product = new Product();
-       // product.setId(productDTO.getId());
+      //  product.setId(productDTO.getId());
         Category cg=new Category();
         cg.setName(productDTO.getCategory());
         cg.setDescription(productDTO.getDescription());
-        // product.setCategory(cg);
+         product.setCategory(cg);
         categoryService.addNewCategory(cg);
         product.setTitle(productDTO.getTitle());
         product.setPrice(productDTO.getPrice());
-//        product.setDescription(productDTO.getDescription());
+        product.setDescription(productDTO.getDescription());
 
         return  product;
     }
@@ -51,10 +51,7 @@ public class ProductController {
         return productsService.GetAllProducts();
     }
 
-    @GetMapping("/byPage")
-    public List<Product> getAllProductByPage() {
-        return productsService.GetAllProductsByPagination();
-    }
+
 
     ///////////////// GET SINGLE  PRODUCT CONTROLLER //////////////////
     @GetMapping("{productId}")
