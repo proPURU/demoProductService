@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface ProductsService {
     List<Product> GetAllProducts();
 
-    public List<Product> GetAllProductsByPagination();
+    public List<Product> GetAllProductsByPagination(int a,int b);
 
     Product addNewProduct(
             ProductDTO product

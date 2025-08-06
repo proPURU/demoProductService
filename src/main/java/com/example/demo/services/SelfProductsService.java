@@ -67,9 +67,9 @@ public class SelfProductsService implements  ProductsService{
     //Pagination is added
 
     @Override
-    public List<Product> GetAllProductsByPagination() {
+    public List<Product> GetAllProductsByPagination(int pageNumber,int pageSize ) {
         List<Product> list = productRepository.findAll();
-        Pageable p = PageRequest.of(2, 5);
+        Pageable p = PageRequest.of(pageNumber, pageSize);
         Page<Product> pageProduct = this.productRepository.findAll(p);
         List<Product> allProducts = pageProduct.getContent();
         return allProducts;

@@ -4,9 +4,11 @@ package com.example.demo.Controller;
 import com.example.demo.DTO.ProductDTO;
 import com.example.demo.Models.Category;
 import com.example.demo.Models.Product;
+import com.example.demo.exceptionHandling.CustomException;
 import com.example.demo.services.CategoryService;
 import com.example.demo.services.ProductsService;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,13 +56,17 @@ public class ProductController {
         return productsService.GetAllProducts();
     }
 
-
+    @GetMapping("/byPage/{pageNumber}/{pageSize}")
+    public List<Product> getAllProductByPage(@PathVariable int pageNumber,@PathVariable int pageSize) {
+        return productsService.GetAllProductsByPagination(pageNumber,pageSize);
+    }
 
     ///////////////// GET SINGLE  PRODUCT CONTROLLER //////////////////
     @GetMapping("{productId}")
     public Optional<Product> getSingleProduct(@PathVariable("productId") Long productId) {
         Optional<Product> product = productsService.getSingleProduct(productId);
         return product;
+
     }
 
 
@@ -69,6 +75,21 @@ public class ProductController {
     @PostMapping()
     public Product addNewProduct(@Valid @RequestBody ProductDTO productDTO)
     {
+        if(productDTO==null)
+        {
+            throw new CustomException(HttpStatus.BAD_REQUEST,"Please enter product required details in order to add product");
+        }
+        Product productObj= productsService.addNewProduct(productDTO);
+        return productObj;
+    }
+
+    @PostMapping("/secondWay")
+    public Product addNewProduct1( @RequestBody ProductDTO productDTO)
+    {
+        if(productDTO.getCategory()==null || productDTO.getTitle()==null)
+        {
+            throw new CustomException(HttpStatus.BAD_REQUEST,"Please enter product required details in order to add product");
+        }
         Product productObj= productsService.addNewProduct(productDTO);
         return productObj;
     }
