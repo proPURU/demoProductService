@@ -6,7 +6,10 @@ import com.example.demo.Models.Category;
 import com.example.demo.Models.Product;
 import com.example.demo.services.CategoryService;
 import com.example.demo.services.ProductsService;
+import jakarta.validation.Valid;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -64,7 +67,7 @@ public class ProductController {
 
     /////////////// ADD NEW PRODUCT CONTROLLER //////////////////
     @PostMapping()
-    public Product addNewProduct(@RequestBody ProductDTO productDTO)
+    public Product addNewProduct(@Valid @RequestBody ProductDTO productDTO)
     {
         Product productObj= productsService.addNewProduct(productDTO);
         return productObj;

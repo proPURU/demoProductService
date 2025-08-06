@@ -1,11 +1,15 @@
 package com.example.demo.DTO;
 
 import com.example.demo.Models.BaseModel;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 
 public class ProductDTO extends BaseModel {
 
     private Long id;
+    @NotBlank(message = "Please enter the title")
     private String title;
+    @Min(value=1000, message = "Pls set/enter above 1000 min price ")
     private double price;
     private String description;
     private String image;
